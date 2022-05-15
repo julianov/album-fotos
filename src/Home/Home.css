@@ -1,0 +1,66 @@
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  #Home-header {
+    background-color: #282c34;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+
+
+  .btn-upload {
+    background-color: #48e046;
+    border: 0.15rem solid #48e046;
+    border-radius: 5rem;
+    color: #00324b;
+    font-family: Raleway,Arial,sans-serif;
+    font-size: .9rem;
+    font-weight: 700;
+    line-height: 2rem;
+    min-width: 9rem; 
+    width: 40%;
+ }
+
+ .btn-borrar {
+    background-color: #32bcfc;
+    border: 0.15rem solid #32bcfc;
+    border-radius: 5rem;
+    color: #fff;
+    font-family: Raleway,Arial,sans-serif;
+    font-size: .9rem;
+    font-weight: 700;
+    line-height: 2rem;
+    min-width: 9rem;
+    width: 40%;
+}
