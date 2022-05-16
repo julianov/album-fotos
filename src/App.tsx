@@ -5,6 +5,10 @@ import { Upload } from './Upload/Upload';
 import { Album } from './Album/Album';
 import { Home } from './Home/Home';
 
+
+//export const url="https://jaodevvps.online:8010/v1/"
+export const url="http://127.0.0.1:8000/v1/"
+
 function App() {
   return (
     <div className="App">

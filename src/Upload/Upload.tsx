@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { url } from '../App';
 import './Upload.css';
 
 
@@ -16,16 +17,27 @@ export const Upload = () => {
         if (event.target.files && event.target.files[0]) {
 
           setCantidadImagenes(event.target.files.length)
-
           for (let i=0; i< event.target.files.length;i++){
             let img = event.target.files[i];
-            
-            setFotos(array => [...array, URL.createObjectURL(img)])
+            //setFotos(array => [...array, URL.createObjectURL(img)])
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                console.log(reader.result);
+                setFotos(array => [...array, String(reader.result)])
+
+            };
+            reader.readAsDataURL(event.target.files[i]);
+            //setFotos(array => [...array, URL.createObjectURL(img)])
           }
-          
         }
       };
 
+     const subirFotos= () => {
+        if (fotos.length>0){
+            enviarFotos(fotos)
+        }
+      }
 
       useEffect(() => {
         if(cantidadImangenes==0){
@@ -79,8 +91,7 @@ export const Upload = () => {
                     
                     <hr/>
                     <div style={{display:"flex", flexDirection:"column", width:"100%", height:"100%", alignItems:"center", margin:"25px 0px 25px 0px"}}>
-                        <button className='btn-upload'>SUBIR</button>
-                        <button className='btn-borrar'>ELIMINAR</button>
+                        <button className='btn-upload' onClick={ ()=>subirFotos()}>SUBIR</button>
                     </div>
                 </div>
             </div>
@@ -125,3 +136,41 @@ export const Upload = () => {
     
 
 }
+
+
+const enviarFotos = async (fotos:any []) =>{
+
+
+  
+    if(fotos.length>0){
+
+        var formDataToUpload = new FormData();
+        formDataToUpload.append("cantidad", String(fotos.length))
+
+      /*  for (let i=0; i<fotos.length;i++){
+            
+
+            formDataToUpload.append("imagen", (fotos[i]))
+            console.log("imagen"+String(i))
+        }*/
+        formDataToUpload.append("imagen", (fotos[0]))
+
+
+        console.log(fotos[0])
+        const axios = require('axios');
+        axios({
+            url:url+"upload",
+            method:'POST',
+            headers: {"content-type": "multipart/form-data"},
+            data:formDataToUpload
+            }).then(function(res: any){
+
+                console.log("lo que llego es: "+res.data)
+                      
+            }).catch((error: any) =>{
+            //Network error comes in
+            });       
+    }
+   
+}
+
