@@ -100,7 +100,6 @@ export const Upload = () => {
         return(
 
             <div style={{display:"flex", flexDirection:"column", width:"100%", height:"100%"}}>
-
                 <div style={{display:"flex", flexDirection:"column", width:"100%", height:"auto"}}>
                     <div style={{display:"flex", flexDirection:"column", width:"100%", height:"auto", justifyContent:"left"}} onClick={()=>setCantidadImagenes(0)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -110,14 +109,12 @@ export const Upload = () => {
                     <h1>FOTOS SELECCIONADAS</h1>
                 </div>
                 <div style={{display:"flex", flexDirection:"column", width:"100%", height:"100%", alignItems:"center"}}>
-
                     <hr/>
+                    <button className='btn-upload' onClick={ ()=>subirFotos()}>SUBIR</button>
 
                     {(fotos || []).map((a) => {
                         uniqueKey=uniqueKey+1
-
                         return (
-                        
                             <img key={uniqueKey} style={{margin:"15px 0px 15px 0px"}} src={a} />
                             ) 
                         })
@@ -125,8 +122,7 @@ export const Upload = () => {
                     
                     <hr/>
                     <div style={{display:"flex", flexDirection:"column", width:"100%", height:"100%", alignItems:"center", margin:"25px 0px 25px 0px"}}>
-                        <button className='btn-upload'>SUBIR</button>
-                        <button className='btn-borrar'>ELIMINAR</button>
+                        <button className='btn-borrar'>BORRAR TODO</button>
                     </div>
                 </div>
             </div>
@@ -147,13 +143,14 @@ const enviarFotos = async (fotos:any []) =>{
         var formDataToUpload = new FormData();
         formDataToUpload.append("cantidad", String(fotos.length))
 
-      /*  for (let i=0; i<fotos.length;i++){
+        for (let i=0; i<fotos.length;i++){
             
 
             formDataToUpload.append("imagen", (fotos[i]))
-            console.log("imagen"+String(i))
-        }*/
-        formDataToUpload.append("imagen", (fotos[0]))
+            console.log("imagen"+{i})
+            console.log("cantidad:"+{i})
+        }
+        //formDataToUpload.append("imagen", (fotos[0]))
 
 
         console.log(fotos[0])
