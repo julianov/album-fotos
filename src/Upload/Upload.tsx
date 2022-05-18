@@ -136,8 +136,6 @@ export const Upload = () => {
 
 const enviarFotos = async (fotos:any []) =>{
 
-
-  
     if(fotos.length>0){
 
         var formDataToUpload = new FormData();
@@ -146,7 +144,13 @@ const enviarFotos = async (fotos:any []) =>{
         for (let i=0; i<fotos.length;i++){
             
 
-            formDataToUpload.append("imagen", (fotos[i]))
+           // const fotuli=fotos[i].split(";")[1]
+            var block = fotos[i]!.split(";");
+            var contentType = block[0].split(":")[1];
+            var realData = block[1].split(",")[1];
+            var blob = b64toBlob(realData, contentType,1);
+            formDataToUpload.append("imagen"+String(i), blob)
+            //console.log(fotuli)
             console.log("imagen"+{i})
             console.log("cantidad:"+{i})
         }
@@ -171,3 +175,42 @@ const enviarFotos = async (fotos:any []) =>{
    
 }
 
+
+  
+export function b64toBlob(b64Data: string, contentType: string, sliceSize: number) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        var byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+  var blob = new Blob(byteArrays, {type: contentType});
+  return blob;
+}
+
+export function strToBlob(b64Data:any) {
+  
+var blob = new Blob(b64Data);
+return blob;
+}
+
+export function _base64ToArrayBuffer(str:string) {
+    var result = [];
+    for (var i = 0; i < str.length; i++) {
+      result.push(str.charCodeAt(i).toString(2));
+    }
+    return result;
+}
