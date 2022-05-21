@@ -40,7 +40,7 @@ const FotosTomadas = () => {
                 console.log("lo que llego es: "+datos.foto)
 
 
-                setFotos(array => [...array, datos])
+                setFotos(array => [...array, datos.foto])
 
                       
             }).catch((error: any) =>{
@@ -54,6 +54,7 @@ const FotosTomadas = () => {
 <div style={{display:"flex", flexDirection:"column", width:"100%", height:"100%"}}>
 
         {(fotos || []).map((a) => {
+                        console.log("veamos pues que hay en a: "+a)
                         uniqueKey=uniqueKey+1
                         return (
                             <img key={uniqueKey} style={{margin:"15px 0px 15px 0px"}} src={a} />
